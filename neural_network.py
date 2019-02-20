@@ -1,5 +1,5 @@
 # USAGE
-# python real_time_object_detection.py --prototxt MobileNetSSD_deploy.prototxt.txt --model MobileNetSSD_deploy.caffemodel
+# python neural_network.py --prototxt MobileNetSSD_deploy.prototxt.txt --model MobileNetSSD_deploy.caffemodel
 
 # import the necessary packages
 from imutils.video import VideoStream
@@ -40,9 +40,10 @@ width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
 print "HEIGHT " + repr(height) #480
 print "WIDTH " + repr(width) #640
 
-while True:
+while(cap.isOpened()):
 	
-	frame = vs.read()
+	ret, frame = cap.read()
+	frame = cv2.flip(frame, 1)
 
 	cv2.line(frame,(450,0),(450,640),(255,0,0),5)
 	cv2.line(frame,(150,240),(450, 240),(255,0,0),5)
@@ -103,35 +104,6 @@ while True:
 				print "right"
 				pyautogui.press('right')
 
-	# # loop over the detections
-	# for i in np.arange(0, detections.shape[2]):
-	# 	# extract the confidence (i.e., probability) associated with
-	# 	# the prediction
-	# 	confidence = detections[0, 0, i, 2]
-	# 	idx = int(detections[0, 0, i, 1])
-	# 	# filter out weak detections by ensuring the `confidence` is
-	# 	# greater than the minimum confidence
-	# 	if confidence > args["confidence"] and CLASSES[idx] == 'bottle':
-	# 		# extract the index of the class label from the
-	# 		# `detections`, then compute the (x, y)-coordinates of
-	# 		# the bounding box for the object
-			
-	# 		box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
-	# 		(startX, startY, endX, endY) = box.astype("int")
-
-	# 		# draw the prediction on the frame
-	# 		label = "{}: {:.2f}%".format(CLASSES[idx],
-	# 			confidence * 100)
-	# 		cv2.rectangle(frame, (startX, startY), (endX, endY),
-	# 			COLORS[idx], 2)
-	# 		y = startY - 15 if startY - 15 > 15 else startY + 15
-	# 		cv2.putText(frame, label, (startX, y),
-	# 			cv2.FONT_HERSHEY_SIMPLEX, 0.5, COLORS[idx], 2)
-
-	# 		centroid_x = (startX + endX) / 2
-	# 		centroid_y = (startY + endY) / 2
-	# 		cv2.circle(frame, (centroid_x, centroid_y), 2, (0,0,255), 2)
-	        
 
 	# show the output frame
 	cv2.imshow("Frame", frame)

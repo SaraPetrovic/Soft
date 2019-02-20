@@ -20,8 +20,6 @@ while(cap.isOpened()):
     ret, img = cap.read()
     img = cv2.flip(img, 1)
 
-    #thresh = cv2.namedWindow('Threshold', cv2.WINDOW_NORMAL)
-    orig = cv2.namedWindow('Original', cv2.WINDOW_NORMAL)
    
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     frame_threshed = cv2.inRange(hsv, BLUE_MIN, BLUE_MAX)
