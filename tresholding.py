@@ -9,6 +9,7 @@ width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
 print("HEIGHT " + repr(height)) #480
 print("WIDTH " + repr(width)) #640
 
+#define range of blue color in HSV
 BLUE_MIN = np.array([98, 109, 20], np.uint8)
 BLUE_MAX = np.array([112, 255, 255], np.uint8)
 
@@ -28,7 +29,7 @@ while(cap.isOpened()):
     #_, frame_threshed = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
 
     contours,hierarchy = cv2.findContours(frame_threshed, 1, 2)
- 
+
     max_area = 0
     if contours:
         for i in contours:
@@ -47,6 +48,7 @@ while(cap.isOpened()):
         cv2.line(img,(450,0),(450,700),(255,0,0),5)
         cv2.line(img,(150,240),(450, 240),(255,0,0),5)
 
+        #cv2.imshow('HSV', hsv)
         #cv2.imshow('Threshold', frame_threshed)
         cv2.imshow('Original', img)
 

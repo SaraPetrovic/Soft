@@ -31,8 +31,7 @@ print("[INFO] loading model...")
 net = cv2.dnn.readNetFromCaffe(args["prototxt"], args["model"])
 
 print("[INFO] starting video stream...")
-vs = VideoStream(src=0).start()
-time.sleep(2.0)
+
 
 cap = cv2.VideoCapture(0)
 height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT) 
